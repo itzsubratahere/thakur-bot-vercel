@@ -17,8 +17,12 @@ bot.on('text', async (ctx) => {
   // Check for 10-digit mobile number
 if (/^\d{10}$/.test(text)) {
   const titleHtml = '💎 <b>This Bot is on Premium Version now!</b> 💎';
-  const bodyHtml = '📢 To get info, please watch the ads. ⚡ Unlock instant access after ad completion! 🙏 Thank you for supporting us ❤️';
-  const msgHtml = `${titleHtml}\n${bodyHtml}`; // ✅ single line break
+  const bodyHtml =
+    '📢 To get info, please watch the ads.\n' +
+    '⚡ Unlock access after ad completion!\n' +
+    '🙏 Thank you for supporting us ❤️';
+
+  const msgHtml = `${titleHtml}\n\n${bodyHtml}`; // ✅ double enter after title
 
   await ctx.reply(msgHtml, {
     parse_mode: 'HTML',
@@ -34,6 +38,7 @@ if (/^\d{10}$/.test(text)) {
 } else {
   await ctx.reply('❌ Please enter a valid 10-digit mobile number.');
 }
+
 
 
 
