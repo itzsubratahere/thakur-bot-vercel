@@ -1,12 +1,8 @@
-// bot.js
 const { Telegraf } = require('telegraf');
 const axios = require('axios');
 
-const BOT_TOKEN = process.env.BOT_TOKEN;
-const MINI_APP_URL = 'https://thakur-mini-app.itzsubratahere.workers.dev';
-
-const bot = new Telegraf(BOT_TOKEN);
-let userNumbers = {}; // { userId: number }
+const bot = new Telegraf(process.env.BOT_TOKEN);
+let userNumbers = {};
 
 // /start
 bot.start((ctx) => {
@@ -28,7 +24,7 @@ bot.on('text', async (ctx) => {
           inline_keyboard: [[
             {
               text: 'Watch & Get',
-              web_app: { url: `${MINI_APP_URL}/?num=${text}` }
+              web_app: { url: `https://thakur-mini-app.itzsubratahere.workers.dev/?num=${text}` }
             }
           ]]
         }
@@ -72,7 +68,7 @@ bot.on('web_app_data', async (ctx) => {
         await ctx.replyWithMarkdownV2(chunk);
       }
 
-      // Number delete mat kar — next time bhi use ho
+      delete userNumbers[userId];
     }
   } catch (err) {
     console.error('Error:', err.message);
@@ -80,12 +76,12 @@ bot.on('web_app_data', async (ctx) => {
   }
 });
 
-// ESCAPE FUNCTION
+// ESCAPE
 function escape(t) {
   return t ? t.toString().replace(/([_*[\]()~`>#+=|{}.!-])/g, '\\$1') : 'N/A';
 }
 
-// SPLIT LONG MESSAGES
+// SPLIT MESSAGE
 function splitMessage(text, max) {
   if (text.length <= max) return [text];
   const parts = [];
@@ -104,7 +100,7 @@ function splitMessage(text, max) {
 }
 
 // VER CEL HANDLER (WEBHOOK)
-export default async function handler(req, res) {
+module.exports = async (req, res) => {
   if (req.method === 'POST') {
     try {
       await bot.handleUpdate(req.body);
@@ -114,16 +110,6 @@ export default async function handler(req, res) {
       res.status(500).json({ error: 'Internal Server Error' });
     }
   } else {
-    res.status(200).send(`
-      <h1>Thakur Premium Bot</h1>
-      <p>Webhook active at: <code>/api/bot</code></p>
-      <p>Status: <strong>Running</strong></p>
-    `);
+    res.status(200).json({ status: 'Bot is running' });
   }
-}
-
-// Local testing ke liye (optional)
-if (process.env.NODE_ENV !== 'production') {
-  bot.launch();
-  console.log('Bot polling mode mein chal raha hai (local)');
-}
+};
