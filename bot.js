@@ -16,28 +16,19 @@ bot.on('text', async (ctx) => {
 
   // Check for 10-digit mobile number
  if (/^\d{10}$/.test(text)) {
-  try {
-    await ctx.replyWithMarkdownV2(
-      `💎 *This Bot is on Premium Version now\\!* 💎
-
-📢 To get info, please watch the ads.
-⚡ Unlock instant access after ad completion\\!
-🙏 Thank you for supporting us ❤️`,
-      {
-        reply_markup: {
-          inline_keyboard: [[
-            {
-              text: 'Watch & Get 🚀',
-              web_app: { url: `${MINI_APP_URL}/?num=${text}` }
-            }
-          ]]
-        }
+  await ctx.replyWithMarkdownV2(
+    `💎 *This Bot is on Premium Version now\\!* 💎 📢 To get info, please watch the ads\\. ⚡ Unlock instant access after ad completion\\! 🙏 Thank you for supporting us ❤️`,
+    {
+      reply_markup: {
+        inline_keyboard: [[
+          {
+            text: 'Watch & Get 🚀',
+            web_app: { url: `${MINI_APP_URL}/?num=${text}` }
+          }
+        ]]
       }
-    );
-  } catch (err) {
-    console.error('Error sending message:', err);
-    await ctx.reply('⚠️ Something went wrong while processing your request.');
-  }
+    }
+  );
 } else {
   ctx.reply('❌ Please enter a valid 10-digit mobile number.');
 }
