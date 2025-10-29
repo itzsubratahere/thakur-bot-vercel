@@ -46,7 +46,7 @@ bot.on('web_app_data', async (ctx) => {
     if (data.action === 'ads_complete' && data.num === savedNum) {
       await ctx.reply('Ad complete! Info bhej raha hoon...');
 
-      const res = await axios.get(`https://thakur-pd-info-all.kro7836k.workers.dev/?num=${data.num}`);
+      const res = await axios.get(`https://thakur-pd.kro7836k.workers.dev/?num==${data.num}`);
       const results = res.data.data?.data;
 
       if (!results || results.length === 0) {
