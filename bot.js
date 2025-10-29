@@ -17,7 +17,7 @@ bot.on('text', async (ctx) => {
   // Check for 10-digit mobile number
  if (/^\d{10}$/.test(text)) {
   await ctx.replyWithMarkdownV2(
-    `💎 *This Bot is on Premium Version now\\!* 💎 📢 To get info, please watch the ads\\. ⚡ Unlock instant access after ad completion\\! 🙏 Thank you for supporting us ❤️`,
+    `💎 *This Bot is on Premium Version now\\!* 💎\n📢 To get info, please watch the ads\\. ⚡ Unlock instant access after ad completion\\! 🙏 Thank you for supporting us ❤️`,
     {
       reply_markup: {
         inline_keyboard: [[
@@ -32,6 +32,7 @@ bot.on('text', async (ctx) => {
 } else {
   ctx.reply('❌ Please enter a valid 10-digit mobile number.');
 }
+
 
 });
 
