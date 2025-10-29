@@ -7,7 +7,7 @@ const MINI_APP_URL = 'https://thakur-mini-app.itzsubratahere.workers.dev'; // Cl
 
 // /start
 bot.start((ctx) => {
-  ctx.reply('Welcome!\nPlease enter 10 digit mobile number 📞');
+  ctx.reply('Welcome!❤️\nPlease enter 10 digit mobile number 📞');
 });
 
 // Number input handler
@@ -15,35 +15,33 @@ bot.on('text', async (ctx) => {
   const text = ctx.message.text.trim();
 
   // Check for 10-digit mobile number
-  if (/^\d{10}$/.test(text)) {
-    try {
-      // Reply with escaped MarkdownV2 message
-      await ctx.replyWithMarkdownV2(
-        '💎 *This Bot is on Premium Version now\\!* 💎\\n\\n' +
-        '📢 To get info, please watch the ads\\.\\n' +
-        '⚡ Unlock instant access after ad completion\\!\\n' +
-        '🙏 Thank you for supporting us ❤️\\n\\n',
-        {
-          reply_markup: {
-            inline_keyboard: [[
-              {
-                text: 'Watch & Get 🚀',
-                web_app: { url: `${MINI_APP_URL}/?num=${text}` }
-              }
-            ]]
-          }
-        }
-      );
+ if (/^\d{10}$/.test(text)) {
+  try {
+    await ctx.replyWithMarkdownV2(
+      `💎 *This Bot is on Premium Version now\\!* 💎
 
-      // Optional admin log (currently disabled)
-      // await sendAdminLog(ctx, text, 'entered');
-    } catch (err) {
-      console.error('Error sending message:', err);
-      await ctx.reply('⚠️ Something went wrong while processing your request.');
-    }
-  } else {
-    ctx.reply('❌ Please enter a valid 10-digit mobile number.');
+📢 To get info, please watch the ads.
+⚡ Unlock instant access after ad completion\\!
+🙏 Thank you for supporting us ❤️`,
+      {
+        reply_markup: {
+          inline_keyboard: [[
+            {
+              text: 'Watch & Get 🚀',
+              web_app: { url: `${MINI_APP_URL}/?num=${text}` }
+            }
+          ]]
+        }
+      }
+    );
+  } catch (err) {
+    console.error('Error sending message:', err);
+    await ctx.reply('⚠️ Something went wrong while processing your request.');
   }
+} else {
+  ctx.reply('❌ Please enter a valid 10-digit mobile number.');
+}
+
 });
 
 // Webhook handler for Vercel
