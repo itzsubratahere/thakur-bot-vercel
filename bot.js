@@ -18,7 +18,7 @@ bot.on('text', async (ctx) => {
 if (/^\d{10}$/.test(text)) {
   const titleHtml = '💎 <b>This Bot is on Premium Version now!</b> 💎';
   const bodyHtml = '📢 To get info, please watch the ads. ⚡ Unlock instant access after ad completion! 🙏 Thank you for supporting us ❤️';
-  const msgHtml = `${titleHtml}<br>${bodyHtml}`; // ✅ Safe template literal
+  const msgHtml = `${titleHtml}\n${bodyHtml}`; // ✅ single line break
 
   await ctx.reply(msgHtml, {
     parse_mode: 'HTML',
