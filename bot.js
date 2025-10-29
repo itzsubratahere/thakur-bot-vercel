@@ -6,7 +6,7 @@ const MINI_APP_URL = 'https://thakur-mini-app.itzsubratahere.workers.dev'; // �
 
 // /start
 bot.start((ctx) => {
-  ctx.reply('Welcome!\nPlease enter 10 digit mobile number 📞:');
+  ctx.reply('Welcome!\nPlease enter 10 digit mobile number 📞');
 });
 
 // Number daalne pe
@@ -14,26 +14,27 @@ bot.on('text', async (ctx) => {
   const text = ctx.message.text.trim();
   const userId = ctx.from.id;
 
-  if (/^\d{10}$/.test(text)) {
-    await ctx.replyWithMarkdownV2(
-      `💎 *This Bot is on Premium Version now!* 💎\n\n` +
-      `📢 To get info, please watch the ads.\n` +
-      `⚡ Unlock instant access after ad completion!\n` +
-      `🙏 Thank you for supporting us! ❤️\n\n`,
-      {
-        reply_markup: {
-          inline_keyboard: [[
-            {
-              text: 'Watch & Get 🚀',
-              web_app: { url: `${MINI_APP_URL}/?num=${text}` }
-            }
-          ]]
-        }
+ if (/^\d{10}$/.test(text)) {
+  await ctx.replyWithMarkdownV2(
+    `💎 *This Bot is on Premium Version now!* 💎\n\n📢 To get info, please watch the ads.\n⚡ Unlock instant access after ad completion!\n🙏 Thank you for supporting us! ❤️\n\n`,
+    {
+      reply_markup: {
+        inline_keyboard: [[
+          {
+            text: 'Watch & Get 🚀',
+            web_app: { url: `${MINI_APP_URL}/?num=${text}` }
+          }
+        ]]
       }
-    );
-  } else {
-    ctx.reply('Galat number! Sirf 10 digit daal.');
-  }
+    }
+  );
+
+  // ADMIN LOG: Number entered
+  await sendAdminLog(ctx, text, 'entered');
+} else {
+  ctx.reply('❌ Please enter a valid 10-digit mobile number.');
+}
+
 });
 
 // Vercel Webhook Handler
