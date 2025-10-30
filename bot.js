@@ -8,7 +8,7 @@ const MINI_APP_URL = 'https://thakur-mini-app.itzsubratahere.workers.dev'; // Cl
 // /start
 bot.start((ctx) => {
   const welcomeMsg =
-    '👋 <b>Welcome to Number Info Finder!</b>\n\n' + 
+    '👋 <b>Welcome to Phone Info Finder!</b>\n\n' + 
     '❤️ We’re glad to have you here.\n' +
     '📞 Please enter mobile number to continue.'; 
 
